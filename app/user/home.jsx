@@ -8,7 +8,8 @@ import {
   SafeAreaView, 
   StatusBar,
   Image,
-  Dimensions 
+  Dimensions,
+  Platform
 } from 'react-native';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { router } from "expo-router";
@@ -60,44 +61,36 @@ export default function AdGridScreen() {
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#FFF" />
 
-       {/* --- 1. Main Header --- */}
-      <View style={styles.headerContainer}>
-        <View style={styles.headerCard}>
-          <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())} style={styles.headerIconButton}>
-            <Ionicons name="menu" size={30} color="#2E7D32" />
-          </TouchableOpacity>
-          
-          <Text style={styles.headerTitleText}>જાહેરાત</Text>
-          
-          <View style={styles.headerRightContainer}>
-            <Image source={require("../../assets/images/logo1.png")} style={styles.headerLogoSmall} />
-          </View>
-        </View>
-      </View> 
-
-      {/* --- 2. Location Filter Bar (Show Selected Location) --- */}
+      {/* --- 1. Location Filter Bar (સુધારેલો લુક) --- */}
       <View style={styles.filterSection}>
         <TouchableOpacity 
+          activeOpacity={0.8}
           style={styles.filterBar}
-          onPress={() => router.push("/auth/location")}
+          onPress={() => router.push("/user/location")}
         >
           <View style={styles.filterLeft}>
-            <Ionicons name="location-sharp" size={20} color="#2E7D32" />
-            <View style={{marginLeft: 10}}>
+            <View style={styles.locationIconCircle}>
+                <Ionicons name="location-sharp" size={18} color="#2E7D32" />
+            </View>
+            <View style={{marginLeft: 12}}>
                 <Text style={styles.filterLabel}>તમારું લોકેશન</Text>
                 <Text style={styles.filterValue}>અમરેલી, ગુજરાત</Text>
             </View>
           </View>
-          <Ionicons name="chevron-down" size={20} color="#666" />
+          
+          <View style={styles.filterRight}>
+             <Text style={styles.changeText}>બદલો</Text>
+             <Ionicons name="chevron-down" size={16} color="#2E7D32" />
+          </View>
         </TouchableOpacity>
       </View>
 
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 100 }}>
         
-        {/* --- 3. Posts List --- */}
+        {/* --- 2. Posts List --- */}
         <View style={styles.postsContainer}>
           {demoPosts.map((post) => (
-            <TouchableOpacity key={post.id} style={styles.postCard} activeOpacity={0.9}>
+            <TouchableOpacity key={post.id} style={styles.postCard} activeOpacity={0.95}>
               
               {/* User Header */}
               <View style={styles.postUserHeader}>
@@ -106,7 +99,6 @@ export default function AdGridScreen() {
                   <Text style={styles.userNameText}>{post.userName}</Text>
                   <Text style={styles.userPhoneText}>{post.userPhone}</Text>
                 </View>
-                {/* Mango Badge if Category is Mango */}
                 {post.category === 'Mango' && (
                     <View style={styles.mangoBadge}>
                         <MaterialCommunityIcons name="fruit-cherries" size={14} color="white" />
@@ -121,11 +113,11 @@ export default function AdGridScreen() {
               {/* Product Details */}
               <View style={styles.postInfo}>
                 <View style={styles.priceRow}>
-                   <View>
+                    <View>
                         <Text style={styles.postPrice}>₹ {post.price}</Text>
                         {post.category === 'Mango' && <Text style={styles.unitText}>પ્રતિ બોક્સ</Text>}
-                   </View>
-                   <TouchableOpacity><Ionicons name="heart-outline" size={26} color="#D32F2F" /></TouchableOpacity>
+                    </View>
+                    <TouchableOpacity><Ionicons name="heart-outline" size={26} color="#D32F2F" /></TouchableOpacity>
                 </View>
                 
                 <Text style={styles.postTitle}>{post.title}</Text>
@@ -156,10 +148,10 @@ export default function AdGridScreen() {
         </View>
       </ScrollView>
 
-      {/* 4. Floating Action Button (Share Style) */}
+      {/* --- 3. Floating Action Button --- */}
       <View style={styles.fabContainer}>
         <View style={styles.sellTextContainer}><Text style={styles.sellText}>મિત્રોને શેર કરો</Text></View>
-        <TouchableOpacity style={styles.fabGreen} onPress={() => router.push("/auth/post")}>
+        <TouchableOpacity style={styles.fabGreen} onPress={() => router.push("/user/post")}>
             <Ionicons name="paper-plane" size={28} color="white" />
         </TouchableOpacity>
       </View>
@@ -169,42 +161,67 @@ export default function AdGridScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#F5F7F5' },
+  container: { flex: 1, backgroundColor: '#F4F7F4' },
   
-  // Header Styles
-  headerContainer: { paddingHorizontal: 15, paddingTop: 10, backgroundColor: '#FFF', paddingBottom: 5 },
-  headerCard: {
-    flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
-    paddingHorizontal: 5, height: 50
+  // Location Bar Styles
+  filterSection: { 
+    paddingHorizontal: 15, 
+    paddingVertical: 12, 
+    backgroundColor: '#FFF', 
+    borderBottomLeftRadius: 25, 
+    borderBottomRightRadius: 25, 
+    elevation: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.1,
+    shadowRadius: 8,
+    zIndex: 10,
   },
-  headerIconButton: { padding: 5 },
-  headerTitleText: { color: '#2E7D32', fontSize: 22, fontWeight: '800', flex: 1, textAlign: 'center' },
-  headerRightContainer: { flexDirection: 'row', alignItems: 'center' },
-  headerLogoSmall: { width: 40, height: 40, resizeMode: 'contain' },
-
-  // Filter Bar Styles
-  filterSection: { paddingHorizontal: 15, paddingVertical: 10, backgroundColor: '#FFF', borderBottomLeftRadius: 20, borderBottomRightRadius: 20, elevation: 2 },
   filterBar: {
-    backgroundColor: '#F8F9F8', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
-    paddingHorizontal: 15, paddingVertical: 10, borderRadius: 12, borderWidth: 1, borderColor: '#E0E0E0',
+    backgroundColor: '#F1F8F1',
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    justifyContent: 'space-between',
+    paddingHorizontal: 12, 
+    paddingVertical: 10, 
+    borderRadius: 15, 
+    borderWidth: 1, 
+    borderColor: '#D0E7D0',
   },
   filterLeft: { flexDirection: 'row', alignItems: 'center' },
-  filterLabel: { fontSize: 10, color: '#999', fontWeight: 'bold' },
-  filterValue: { fontSize: 14, color: '#2E7D32', fontWeight: 'bold' },
+  locationIconCircle: {
+    width: 38,
+    height: 38,
+    borderRadius: 19,
+    backgroundColor: '#FFF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    elevation: 3,
+  },
+  filterLabel: { fontSize: 10, color: '#666', fontWeight: 'bold', textTransform: 'uppercase' },
+  filterValue: { fontSize: 15, color: '#1B5E20', fontWeight: 'bold' },
+  filterRight: { flexDirection: 'row', alignItems: 'center' },
+  changeText: { fontSize: 12, color: '#2E7D32', fontWeight: 'bold', marginRight: 4 },
 
-  // Post Card Styles
-  postsContainer: { paddingHorizontal: 15, paddingTop: 20 },
-  postCard: { backgroundColor: 'white', borderRadius: 20, marginBottom: 25, overflow: 'hidden', elevation: 4, shadowColor: '#000', shadowOpacity: 0.1, shadowRadius: 10 },
+  // Posts List
+  postsContainer: { paddingHorizontal: 15, paddingTop: 10 },
+  postCard: { 
+    backgroundColor: 'white', 
+    borderRadius: 20, 
+    marginBottom: 20, 
+    overflow: 'hidden', 
+    elevation: 4, 
+    shadowColor: '#000', 
+    shadowOpacity: 0.1, 
+    shadowRadius: 10 
+  },
   postUserHeader: { flexDirection: 'row', padding: 15, alignItems: 'center' },
   userAvatar: { width: 45, height: 45, borderRadius: 22.5, backgroundColor: '#F0F0F0' },
   userTextInfo: { marginLeft: 12, flex: 1 },
   userNameText: { fontSize: 16, fontWeight: 'bold', color: '#333' },
   userPhoneText: { fontSize: 13, color: '#666' },
-  
-  // Mango Special Badge
   mangoBadge: { backgroundColor: '#FF8F00', flexDirection: 'row', alignItems: 'center', paddingHorizontal: 10, paddingVertical: 5, borderRadius: 15 },
   mangoBadgeText: { color: 'white', fontSize: 11, fontWeight: 'bold', marginLeft: 4 },
-
   postImage: { width: '100%', height: 280, resizeMode: 'cover' },
   postInfo: { padding: 15 },
   priceRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start' },
@@ -215,7 +232,6 @@ const styles = StyleSheet.create({
   locationRow: { flexDirection: 'row', alignItems: 'center' },
   postLocation: { fontSize: 14, color: '#777', marginLeft: 4 },
   postTime: { fontSize: 13, color: '#999' },
-
   actionRow: { flexDirection: 'row', padding: 15, borderTopWidth: 1, borderTopColor: '#F5F5F5', justifyContent: 'space-between' },
   actionButton: { flexDirection: 'row', flex: 0.48, height: 48, borderRadius: 12, justifyContent: 'center', alignItems: 'center', elevation: 2 },
   actionButtonText: { color: 'white', fontWeight: 'bold', marginLeft: 8, fontSize: 15 },
@@ -223,6 +239,6 @@ const styles = StyleSheet.create({
   // FAB
   fabContainer: { position: 'absolute', bottom: 25, right: 20, flexDirection: 'row', alignItems: 'center' },
   fabGreen: { backgroundColor: '#2E7D32', width: 60, height: 60, borderRadius: 30, justifyContent: 'center', alignItems: 'center', elevation: 8 },
-  sellTextContainer: { backgroundColor: 'white', paddingHorizontal: 15, paddingVertical: 8, borderRadius: 20, marginRight: 10, elevation: 5, shadowColor: '#000', shadowOpacity: 0.2 },
+  sellTextContainer: { backgroundColor: 'white', paddingHorizontal: 15, paddingVertical: 8, borderRadius: 20, marginRight: 10, elevation: 5 },
   sellText: { fontSize: 14, color: '#2E7D32', fontWeight: 'bold' }
 });

@@ -86,7 +86,7 @@ export default function TipsScreen() {
           style={styles.bottomButton} 
           onPress={() => router.back()} // અથવા તમારી જરૂરિયાત મુજબનું નેવિગેશન
         >
-          <Text style={styles.bottomButtonText}onPress={() => router.push("/auth/home")}>હું ઉપરના મુદ્દાઓનું ધ્યાન રાખીશ.</Text>
+          <Text style={styles.bottomButtonText}onPress={() => router.push("/user/home")}>હું ઉપરના મુદ્દાઓનું ધ્યાન રાખીશ.</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>

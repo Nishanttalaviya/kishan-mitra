@@ -62,7 +62,7 @@ export default function LocationFilterScreen() {
       {/* Header */}
       <View style={styles.header}>
         <TouchableOpacity onPress={goBack} style={styles.backBtn}>
-          <Ionicons name="arrow-back" size={26} color="#333" />
+          <Ionicons name="arrow-back" size={26} color="#2E7D32" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>લોકેશન ફિલ્ટર</Text>
         <TouchableOpacity onPress={() => {setStep(1); setSelection({state:'', district:'', taluka:'', village:''})}}>
@@ -126,7 +126,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
     padding: 15, backgroundColor: '#FFF', elevation: 2 
   },
-  headerTitle: { fontSize: 18, fontWeight: 'bold', color: '#333' },
+  headerTitle: { fontSize: 18, fontWeight: 'bold', color: '#2E7D32' },
   backBtn: { padding: 5 },
   resetTopText: { color: '#D32F2F', fontWeight: 'bold', fontSize: 14 },
 
