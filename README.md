@@ -1,4 +1,4 @@
-# 📱 Pipalana Pane - Marketplace UI (React Native Expo)
+# 📱 Ammbana Pane - Marketplace UI (React Native Expo)
 
 A professional marketplace application interface designed specifically for buying and selling livestock (Cows, Buffaloes), tractors, and agricultural equipment. This project is built using React Native and Expo.
 
