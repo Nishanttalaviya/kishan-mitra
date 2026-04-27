@@ -67,7 +67,7 @@ export default function AdGridScreen() {
             <Ionicons name="menu" size={30} color="#2E7D32" />
           </TouchableOpacity>
           
-          <Text style={styles.headerTitleText}>પીપળવા પાન</Text>
+          <Text style={styles.headerTitleText}>જાહેરાત</Text>
           
           <View style={styles.headerRightContainer}>
             <Image source={require("../../assets/images/logo1.png")} style={styles.headerLogoSmall} />
@@ -159,8 +159,8 @@ export default function AdGridScreen() {
       {/* 4. Floating Action Button (Share Style) */}
       <View style={styles.fabContainer}>
         <View style={styles.sellTextContainer}><Text style={styles.sellText}>મિત્રોને શેર કરો</Text></View>
-        <TouchableOpacity style={styles.fabGreen}>
-            <Ionicons name="share-social" size={28} color="white" />
+        <TouchableOpacity style={styles.fabGreen} onPress={() => router.push("/auth/post")}>
+            <Ionicons name="paper-plane" size={28} color="white" />
         </TouchableOpacity>
       </View>
 
