@@ -60,10 +60,10 @@ export default function AdGridScreen() {
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#FFF" />
 
-      {/* --- 1. Main Header --- */}
+       {/* --- 1. Main Header --- */}
       <View style={styles.headerContainer}>
         <View style={styles.headerCard}>
-          <TouchableOpacity onPress={() => router.replace("/auth/profile")} style={styles.headerIconButton}>
+          <TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())} style={styles.headerIconButton}>
             <Ionicons name="menu" size={30} color="#2E7D32" />
           </TouchableOpacity>
           
@@ -73,7 +73,7 @@ export default function AdGridScreen() {
             <Image source={require("../../assets/images/logo1.png")} style={styles.headerLogoSmall} />
           </View>
         </View>
-      </View>
+      </View> 
 
       {/* --- 2. Location Filter Bar (Show Selected Location) --- */}
       <View style={styles.filterSection}>
