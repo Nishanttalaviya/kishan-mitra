@@ -77,7 +77,7 @@ export default function App() {
         </TouchableOpacity>
 
         {/* Submit Button */}
-        <TouchableOpacity style={styles.submitButton} onPress={() => router.push("/auth/sarat")}>
+        <TouchableOpacity style={styles.submitButton} onPress={() => router.push("/auth/condition")}>
           <Text style={styles.submitButtonText}>નોંધણી</Text>
         </TouchableOpacity>
       </ScrollView>
