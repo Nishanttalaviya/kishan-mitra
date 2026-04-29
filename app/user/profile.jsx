@@ -52,10 +52,10 @@ export default function ProfileScreen() {
           <ProfileOption icon="help-circle-outline" title="મદદ અને સપોર્ટ" />
           
           {/* લોગઆઉટ બટન */}
-          <TouchableOpacity 
-            style={[styles.optionItem, { borderBottomWidth: 0 }]} 
-            onPress={() => console.log("Logout Clicked")}
-          >
+         <TouchableOpacity
+  style={[styles.optionItem, { borderBottomWidth: 0 }]}
+  onPress={() => router.push("/")}
+>
             <View style={styles.optionLeft}>
               <Ionicons name="log-out-outline" size={24} color="#D32F2F" />
               <Text style={[styles.optionText, { color: '#D32F2F' }]}>લોગઆઉટ</Text>

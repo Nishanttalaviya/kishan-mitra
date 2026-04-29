@@ -31,36 +31,41 @@ export default function CustomDrawerContent(props) {
     >
       {/* Header */}
       <TouchableOpacity
-        style={styles.header}
-        onPress={() => {
-          props.navigation.closeDrawer();
-          router.push("/user/profile");
-        }}
-      >
-        <Image
-          source={{ uri: "https://via.placeholder.com/60" }}
-          style={styles.profileImage}
-        />
+  style={styles.header}
+  onPress={() => {
+    props.navigation.closeDrawer();
+    router.push("/user/profile");
+  }}
+>
+  {/* Profile Image */}
+  <Image
+    source={{ uri: "https://via.placeholder.com/60" }}
+    style={styles.profileImage}
+  />
 
-        <View style={styles.userInfo}>
-          <Text style={styles.name}>Nishant Talaviya</Text>
-          <Text style={styles.phone}>+918511283223</Text>
-        </View>
-        <TouchableOpacity
-        onPress={() => {
-          props.navigation.closeDrawer();
-          router.push("/user/profile");
-        }}
-      >
-        <Text style={styles.editIcon}>✏️</Text>
-      </TouchableOpacity>
+  {/* User Info */}
+  <View style={styles.userInfo}>
+    <Text style={styles.name}>Nishant Talaviya</Text>
+    <Text style={styles.phone}>+918511283223</Text>
+  </View>
 
-        <Image
-          source={require("../../assets/images/logo1.png")}
-          style={styles.logo}
-        />
-      </TouchableOpacity>
+  {/* Edit Icon */}
+  <TouchableOpacity
+    style={styles.editButton}
+    onPress={() => {
+      props.navigation.closeDrawer();
+      router.push("/user/profile");
+    }}
+  >
+    <Text style={styles.editIcon}>✏️</Text>
+  </TouchableOpacity>
 
+  {/* Logo */}
+  <Image
+    source={require("../../assets/images/logo1.png")}
+    style={styles.logo}
+  />
+</TouchableOpacity>
       {/* Menu */}
       <View style={styles.menuContainer}>
         {menuItems.map((item, index) => (

@@ -63,12 +63,16 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     backgroundColor: "#FFFFFF",
-    marginHorizontal: 15,
+    marginHorizontal: 8,
     marginVertical: 10,
     height: 60,
     borderRadius: 15,
     paddingHorizontal: 10,
     elevation: 5,
+        borderWidth: 1, 
+
+    borderColor: '#D0E7D0',
+
   },
   headerTitle: {
     fontSize: 18,
