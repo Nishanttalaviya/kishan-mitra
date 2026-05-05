@@ -24,7 +24,7 @@ export default function ProfileScreen() {
           
           {/* બેક બટન - ડાબી બાજુ સેટ કરેલ છે */}
           <TouchableOpacity 
-            onPress={() => router.back()} 
+            onPress={() => router.back("/home")} 
             style={styles.backButton}
           >
             <Ionicons name="arrow-back" size={26} color="#2E7D32" />

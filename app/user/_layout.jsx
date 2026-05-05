@@ -1,89 +1,28 @@
-import { Drawer } from "expo-router/drawer";
-import {
-  StyleSheet,
-  SafeAreaView,
-  Platform,
-  Image,
-  Text,
-  View,
-} from "react-native";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { DrawerToggleButton } from "@react-navigation/drawer";
-import CustomDrawerContent from "./CustomDrawerContent";
-
-export default function Layout() {
-  const CustomBoxHeader = () => (
-    <SafeAreaView style={styles.safeArea}>
-      <View style={styles.headerBox}>
-        
-        {/* Drawer Menu Button */}
-        <DrawerToggleButton tintColor="#2E7D32" />
-
-        <Text style={styles.headerTitle}>જાહેરાત</Text>
-
-        <Image
-          source={require("../../assets/images/logo1.png")}
-          style={styles.headerLogoSmall}
-        />
-      </View>
-    </SafeAreaView>
-  );
-
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
+import { Stack } from 'expo-router';
+// કારણ કે બંને એક જ ફોલ્ડરમાં છે, એટલે માત્ર './' આવશે
+import CustomBottomTab from './CustomBottomTab';
+export default function UserLayout() {
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
-      <Drawer
-        drawerContent={(props) => <CustomDrawerContent {...props} />}
-        screenOptions={{
-          header: () => <CustomBoxHeader />,
-          overlayColor: "rgba(0,0,0,0.3)",
-        }}
-      >
-        <Drawer.Screen name="home" />
-        <Drawer.Screen name="post" />
-       <Drawer.Screen
-  name="profile"
-  options={{
-    drawerItemStyle: { display: "none" },
-    headerShown: false,
-  }}
-/>
-        <Drawer.Screen name="location" />
-      </Drawer>
-    </GestureHandlerRootView>
+    <View style={styles.container}>
+      {/* આ ભાગમાં તમારા બધા પેજ (Home, Profile) દેખાશે */}
+      <View style={styles.content}>
+        <Stack screenOptions={{ headerShown: false }} />
+      </View>
+
+      {/* આ તમારો ટેબ બાર છે જે હંમેશા નીચે રહેશે */}
+      <CustomBottomTab />
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  safeArea: {
-    backgroundColor: "#F5F7F5",
-    paddingTop: Platform.OS === "android" ? 40 : 0,
-  },
-  headerBox: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    backgroundColor: "#FFFFFF",
-    marginHorizontal: 8,
-    marginVertical: 10,
-    height: 60,
-    borderRadius: 15,
-    paddingHorizontal: 10,
-    elevation: 5,
-        borderWidth: 1, 
-
-    borderColor: '#D0E7D0',
-
-  },
-  headerTitle: {
-    fontSize: 18,
-    fontWeight: "bold",
-    color: "#2E7D32",
+  container: {
     flex: 1,
-    textAlign: "center",
+    backgroundColor: '#F4F7F4', // મેઈન બેકગ્રાઉન્ડ કલર
   },
-  headerLogoSmall: {
-    width: 35,
-    height: 35,
-    resizeMode: "contain",
+  content: {
+    flex: 1, // આનાથી પેજ આખી જગ્યા રોકશે અને Blank નહીં દેખાય
   },
 });

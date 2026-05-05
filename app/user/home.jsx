@@ -58,8 +58,22 @@ export default function AdGridScreen() {
   ];
 
   return (
+    
     <SafeAreaView style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor="#FFF" />
+      <View style={styles.headerBox}>
+        <Image
+          source={require("../../assets/images/logo1.png")}
+          style={styles.headerLogoSmall}
+        />
+        <Text style={styles.headerTitle}>જાહેરાત</Text>
+        <TouchableOpacity 
+          onPress={() => console.log("Wishlist Clicked")}
+          style={styles.headerRightButton}
+        >
+          <Ionicons name="heart-outline" size={26} color="#2E7D32" />
+        </TouchableOpacity>
+      </View>
 
       {/* --- 1. Location Filter Bar (સુધારેલો લુક) --- */}
       <View style={styles.filterSection}>
@@ -149,12 +163,12 @@ export default function AdGridScreen() {
       </ScrollView>
 
       {/* --- 3. Floating Action Button --- */}
-      <View style={styles.fabContainer}>
+      {/* <View style={styles.fabContainer}>
         <View style={styles.sellTextContainer}><Text style={styles.sellText}>મિત્રોને શેર કરો</Text></View>
         <TouchableOpacity style={styles.fabGreen} onPress={() => router.push("/user/post")}>
             <Ionicons name="paper-plane" size={28} color="white" />
         </TouchableOpacity>
-      </View>
+      </View> */}
 
     </SafeAreaView>
   );
@@ -162,6 +176,10 @@ export default function AdGridScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#F4F7F4' },
+  safeArea: {
+    backgroundColor: "#F5F7F5",
+    paddingTop: Platform.OS === "android" ? 40 : 0,
+  },
   
   // Location Bar Styles
   // filterSection: { 
@@ -176,6 +194,39 @@ const styles = StyleSheet.create({
   //   shadowRadius: 8,
   //   zIndex: 10,
   // },
+  headerBox: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    backgroundColor: "#FFFFFF",
+    marginHorizontal: 12,
+    marginVertical: 8,
+    height: 65,
+    borderRadius: 18,
+    paddingHorizontal: 15,
+    elevation: 4,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    borderWidth: 1,
+    borderColor: '#D0E7D0',
+  },
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#2E7D32",
+    flex: 1,
+    textAlign: "center",
+  },
+  headerLogoSmall: {
+    width: 38,
+    height: 38,
+    resizeMode: "contain",
+  },
+  headerRightButton: {
+    padding: 5,
+  },
   filterBar: {
     backgroundColor: '#Ffff',
     flexDirection: 'row', 
