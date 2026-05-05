@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
   mainFab: {
     position: 'absolute',
     // બટનને બારની લાઈન પર સેટ કરવા માટે
-    top: -25, 
+    top: -20, 
     alignSelf: 'center',
     zIndex: 1100,
   },
