@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     backgroundColor: "#FFFFFF",
-    marginHorizontal: 12,
+    marginHorizontal: 8,
     marginVertical: 8,
     height: 65,
     borderRadius: 18,
